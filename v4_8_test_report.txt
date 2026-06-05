@@ -1,0 +1,52 @@
+Integration Architect Pro v4.8 full check
+Mon Jun  1 18:25:32 UTC 2026
+
+py_compile passed
+
+OK test_async_heavy_processing_prefers_job_flow
+OK test_audit_detects_core_production_risks_and_no_demo_hardcode_needed
+OK test_business_conflict_speed_strict_freshness_external_dependency_is_flagged
+OK test_business_context_activates_cache_read_model_and_fallback
+OK test_complex_fanout_fanin_gets_orchestrated_join_solution
+OK test_event_choreography_chain_prefers_event_choreography
+OK test_file_legacy_chooses_batch_file_integration
+OK test_financial_operation_prefers_operation_state_machine
+OK test_hot_client_status_selects_fast_read_cached_model
+OK test_migration_strangler_prefers_migration_variant
+OK test_multi_source_aggregation_has_partial_response_requirements
+OK test_near_real_time_decision_prefers_stream_decision_flow
+OK test_no_changes_existing_flow_prefers_non_invasive_extension
+OK test_reference_data_prefers_versioned_cache
+OK test_regulatory_batch_dwh_selects_data_pipeline
+OK test_simple_rest_is_not_polluted_by_e2e_defaults
+OK test_unknown_orchestration_blocks_complex_chain
+OK test_webhook_callback_selects_inbox_processing
+Passed 18 tests
+
+OK 01_simple_rest_with_headers: Basic API + DB, score=85, readiness=100
+OK 02_hot_client_status_cache: Fast Read / Cached Read Model, score=100, readiness=92
+OK 03_financial_operation: Financial Operation State Machine, score=100, readiness=74
+OK 04_complex_loan_e2e_fanout_fanin: Fan-out/Fan-in Orchestrated Process, score=100, readiness=84
+OK 05_event_choreography_many_consumers: Event Choreography, score=100, readiness=92
+OK 06_webhook_callback: Webhook Intake + Inbox Processing, score=70, readiness=80
+OK 07_regulatory_dwh_batch: Data Pipeline / DWH, score=100, readiness=92
+OK 08_legacy_file_exchange: Batch/File Integration, score=100, readiness=92
+OK 09_customer_360_multi_source: BFF/API Composition with Partial Response, score=100, readiness=85
+OK 10_reference_data: Reference Data API + Versioned Cache, score=100, readiness=95
+OK 11_async_heavy_job: Async Job / Heavy Processing Flow, score=100, readiness=100
+OK 12_near_real_time_antifraud: Near Real-time Decision Flow, score=100, readiness=92
+OK 13_migration_strangler: Migration / Strangler Fig, score=100, readiness=100
+OK 14_data_sync_source_of_truth: Data Synchronization / Source-of-Truth Sync, score=100, readiness=95
+OK 15_business_conflict_speed_strict_external: Fast Read / Cached Read Model, score=100, readiness=71
+OK 16_strict_ordering_statuses: Event Choreography, score=100, readiness=87
+Passed 16 full SA scenario tests
+
+OK hard_soap_legacy_layer: Fan-out/Fan-in Orchestrated Process, score=95, readiness=68
+OK dwh_is_layer_in_core_flow: Orchestrated E2E Process, score=100, readiness=100
+OK webhook_layer_in_financial_flow: Financial Operation State Machine, score=100, readiness=82
+Passed 3 rank guard tests
+
+OK test_product_sections_are_generated_for_complex_case
+OK test_poor_requirements_have_quality_gate_questions
+Passed 2 v4.8 product section tests
+web smoke GET / = 200

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.git/
+.gitignore
+.integration_architect_pro/app.sqlite3
+.integration_architect_pro/generated_reports/
+*.log

@@ -1,0 +1,22 @@
+Жёсткая проверка v4.6
+
+Запущено:
+1) python test_integration_architect.py — 18/18 passed.
+2) python test_sa_full_coverage.py — 16/16 passed.
+3) Ручные проверки:
+   - пустая форма: заблокирована, confidence <= 35;
+   - валидный простой REST-кейс: Basic API + DB, readiness/confidence 100;
+   - HTML формы содержит chip/checkbox-ввод для multi-select;
+   - сложные кейсы возвращают composite_architecture по слоям.
+
+Что было исправлено:
+- пустой/слишком слабый ввод больше не получает псевдо-рекомендацию;
+- score варианта отделён от confidence по входным данным;
+- добавлен слой composite architecture для сложных решений;
+- добавлены hard warnings для денег, клиентских статусов, регуляторики, speed/freshness конфликтов;
+- добавлены API lifecycle, SRE, data governance, capacity/security чеклисты;
+- UX multi-select заменён на chip/checkbox;
+- исправлен audit preset current_integration_matrix: порядок колонок приведён к схеме парсера.
+
+Вывод системного аналитика:
+Инструмент теперь реально пригоден как детерминированный помощник для первичного проектирования и аудита интеграций. Он покрывает простые API-кейсы и сложные E2E/highload/fan-out/fan-in/финансовые/DWH/webhook/legacy/migration сценарии. Для production его всё равно нужно использовать как генератор проектного черновика + чеклист, а не как замену архитектурному ревью.
