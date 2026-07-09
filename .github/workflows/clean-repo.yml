@@ -1,0 +1,75 @@
+name: Clean repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Напиши DELETE, чтобы подтвердить очистку репозитория"
+        required: true
+        default: ""
+      keep_workflows:
+        description: "Оставить .github/workflows, чтобы можно было запускать workflow дальше"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "DELETE" ]; then
+            echo "Очистка отменена. Для запуска нужно ввести DELETE."
+            exit 1
+          fi
+
+      - name: Clean repository files
+        run: |
+          echo "Cleaning repository..."
+
+          if [ "${{ github.event.inputs.keep_workflows }}" = "true" ]; then
+            mkdir -p /tmp/keep_workflows
+            if [ -d ".github/workflows" ]; then
+              cp -R .github/workflows /tmp/keep_workflows/workflows
+            fi
+          fi
+
+          find . -mindepth 1 \
+            ! -path "./.git" \
+            ! -path "./.git/*" \
+            -exec rm -rf {} +
+
+          if [ "${{ github.event.inputs.keep_workflows }}" = "true" ]; then
+            mkdir -p .github
+            if [ -d "/tmp/keep_workflows/workflows" ]; then
+              cp -R /tmp/keep_workflows/workflows .github/workflows
+            fi
+          fi
+
+      - name: Commit cleanup
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "Нет изменений для коммита."
+            exit 0
+          fi
+
+          git commit -m "Clean repository"
+          git push
