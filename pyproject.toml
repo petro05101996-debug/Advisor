@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cogproxy-dqe"
+version = "0.4.2"
+description = "Distributed Quality Engine core for LLM quality orchestration and bug analysis"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "CogProxy DQE"}]
+dependencies = []
+
+[project.scripts]
+cogproxy-dqe = "cogproxy_dqe.cli:main"
+
+[tool.setuptools]
+packages = ["cogproxy_dqe"]

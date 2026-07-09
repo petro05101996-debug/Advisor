@@ -1,0 +1,1 @@
+ERROR null value in column "customer_id" violates not-null constraint

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/etl/mapper.py", line 2, in map_partner
+    return {"id": row["id"], "status": row["status"].upper()}
+KeyError: 'status'

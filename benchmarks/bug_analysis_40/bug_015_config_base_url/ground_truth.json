@@ -1,0 +1,40 @@
+{
+  "case_id": "bug_015_config_base_url",
+  "title": "Wrong base URL",
+  "language": "python",
+  "task": "Service calls sandbox URL in prod.",
+  "files": {
+    "config.py": "PAYMENT_BASE_URL = \"https://sandbox-payments.local\"\n",
+    "payments/client.py": "from config import PAYMENT_BASE_URL\ndef url(): return PAYMENT_BASE_URL + \"/charge\"\n"
+  },
+  "docs": {
+    "docs/deploy.md": "Production PAYMENT_BASE_URL must be https://payments.prod.local.\n"
+  },
+  "log": "ERROR 404 from https://sandbox-payments.local/charge in prod\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/payments/client.py\", line 2, in url\n    return PAYMENT_BASE_URL + \"/charge\"\nRuntimeError: upstream returned 404 for sandbox endpoint\n",
+  "expected_files": [
+    "payments/client.py",
+    "config.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "sandbox",
+    "prod",
+    "PAYMENT_BASE_URL",
+    "404"
+  ],
+  "fix_terms": [
+    "config",
+    "prod",
+    "base url"
+  ],
+  "test_terms": [
+    "prod config",
+    "sandbox"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

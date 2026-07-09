@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/reports/export.py", line 2, in write_report
+    open(path, "w").write(text)
+PermissionError: [Errno 13] Permission denied: '/var/reports/out.csv'

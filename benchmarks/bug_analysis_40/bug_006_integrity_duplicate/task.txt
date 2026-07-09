@@ -1,0 +1,1 @@
+Payment callback sometimes fails with unique constraint.

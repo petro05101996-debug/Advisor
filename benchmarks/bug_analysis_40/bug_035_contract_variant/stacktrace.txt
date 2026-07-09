@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/consumer_35/mapper.py", line 2, in map_payload
+    return p["field_35"].strip()
+KeyError: 'field_35'

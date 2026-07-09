@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/zzzz/final/orders.py", line 3, in boom
+    return user["id"]
+TypeError: 'NoneType' object is not subscriptable

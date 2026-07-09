@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_017_pydantic_validation",
+  "title": "ValidationError missing email",
+  "language": "python",
+  "task": "API rejects customer payload.",
+  "files": {
+    "api/schemas.py": "class CustomerIn(BaseModel):\n    id: str\n    email: str\n"
+  },
+  "docs": {
+    "docs/api.md": "email is optional for phone-only customers since v3.\n"
+  },
+  "log": "pydantic.ValidationError: email field required\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/api/schemas.py\", line 2, in validate_customer\n    return CustomerIn(**payload)\npydantic.ValidationError: 1 validation error for CustomerIn\nemail\n  field required\n",
+  "expected_files": [
+    "api/schemas.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "email",
+    "optional",
+    "ValidationError",
+    "schema"
+  ],
+  "fix_terms": [
+    "Optional",
+    "schema",
+    "phone-only"
+  ],
+  "test_terms": [
+    "without email"
+  ],
+  "forbidden_terms": [
+    "timeout"
+  ]
+}

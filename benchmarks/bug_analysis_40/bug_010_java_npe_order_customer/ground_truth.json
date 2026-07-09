@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_010_java_npe_order_customer",
+  "title": "Java NPE customer",
+  "language": "java",
+  "task": "Order confirmation fails in Java service.",
+  "files": {
+    "src/main/java/app/OrderService.java": "package app;\nclass OrderService {\n  String customerName(Order order) {\n    return order.getCustomer().getName();\n  }\n}\n"
+  },
+  "docs": {
+    "docs/orders.md": "Imported orders may have no customer until enrichment completes.\n"
+  },
+  "log": "java.lang.NullPointerException: Cannot invoke \"Customer.getName()\" because return value of \"Order.getCustomer()\" is null\n",
+  "stacktrace": "java.lang.NullPointerException: Cannot invoke \"Customer.getName()\" because return value of \"Order.getCustomer()\" is null\n    at app.OrderService.customerName(OrderService.java:4)\n    at app.Controller.confirm(Controller.java:12)\n",
+  "expected_files": [
+    "src/main/java/app/OrderService.java"
+  ],
+  "expected_lines": [
+    4
+  ],
+  "root_terms": [
+    "getCustomer",
+    "null",
+    "getName",
+    "enrichment"
+  ],
+  "fix_terms": [
+    "null",
+    "guard",
+    "enrichment",
+    "domain"
+  ],
+  "test_terms": [
+    "order without customer",
+    "enrichment"
+  ],
+  "forbidden_terms": [
+    "python"
+  ]
+}

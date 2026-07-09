@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_007_not_null_violation",
+  "title": "Missing required db field",
+  "language": "python/sql",
+  "task": "Order insert fails after new schema migration.",
+  "files": {
+    "orders/repository.py": "def insert_order(db, order):\n    db.execute(\"insert into orders(id, amount) values (:id, :amount)\", order)\n"
+  },
+  "docs": {
+    "docs/schema.md": "orders.customer_id is NOT NULL from migration 20260701.\n"
+  },
+  "log": "ERROR null value in column \"customer_id\" violates not-null constraint\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/orders/repository.py\", line 2, in insert_order\n    db.execute(\"insert into orders(id, amount) values (:id, :amount)\", order)\nIntegrityError: null value in column \"customer_id\" violates not-null constraint\n",
+  "expected_files": [
+    "orders/repository.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "customer_id",
+    "NOT NULL",
+    "schema",
+    "insert_order"
+  ],
+  "fix_terms": [
+    "customer_id",
+    "mapping",
+    "migration",
+    "validation"
+  ],
+  "test_terms": [
+    "customer_id",
+    "insert"
+  ],
+  "forbidden_terms": [
+    "timeout"
+  ]
+}

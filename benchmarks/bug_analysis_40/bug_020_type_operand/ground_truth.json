@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_020_type_operand",
+  "title": "TypeError string amount",
+  "language": "python",
+  "task": "Payment amount multiplication fails.",
+  "files": {
+    "pay/amount.py": "def cents(amount):\n    return amount * 100 + 0\n"
+  },
+  "docs": {
+    "docs/payments.md": "amount comes as string from legacy API.\n"
+  },
+  "log": "TypeError: can only concatenate str (not \"int\") to str\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/pay/amount.py\", line 2, in cents\n    return amount * 100 + 0\nTypeError: can only concatenate str (not \"int\") to str\n",
+  "expected_files": [
+    "pay/amount.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "amount",
+    "string",
+    "int",
+    "legacy"
+  ],
+  "fix_terms": [
+    "parse",
+    "Decimal",
+    "validation"
+  ],
+  "test_terms": [
+    "string amount"
+  ],
+  "forbidden_terms": [
+    "timeout"
+  ]
+}

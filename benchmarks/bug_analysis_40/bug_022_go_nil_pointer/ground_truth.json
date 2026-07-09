@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_022_go_nil_pointer",
+  "title": "Go nil pointer",
+  "language": "go",
+  "task": "Go handler panics on missing account.",
+  "files": {
+    "service/account.go": "func Build(a *Account) string { return a.ID }\n"
+  },
+  "docs": {
+    "docs/account.md": "Missing account should return 404.\n"
+  },
+  "log": "panic: runtime error: invalid memory address or nil pointer dereference\n",
+  "stacktrace": "panic: runtime error: invalid memory address or nil pointer dereference\nmain.Build(...)\n\t/srv/service/account.go:1\n",
+  "expected_files": [
+    "service/account.go"
+  ],
+  "expected_lines": [
+    1
+  ],
+  "root_terms": [
+    "nil",
+    "Account",
+    "ID",
+    "404"
+  ],
+  "fix_terms": [
+    "nil",
+    "guard",
+    "404"
+  ],
+  "test_terms": [
+    "missing account"
+  ],
+  "forbidden_terms": [
+    "KeyError"
+  ]
+}

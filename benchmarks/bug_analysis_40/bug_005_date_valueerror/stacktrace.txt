@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/app/date_parser.py", line 3, in parse_partner_date
+    return datetime.strptime(value, "%Y-%m-%d")
+ValueError: time data '09.07.2026' does not match format '%Y-%m-%d'

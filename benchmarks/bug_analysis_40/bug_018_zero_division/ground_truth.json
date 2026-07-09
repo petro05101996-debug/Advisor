@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_018_zero_division",
+  "title": "ZeroDivisionError no items",
+  "language": "python",
+  "task": "Average calculator fails.",
+  "files": {
+    "metrics/avg.py": "def average(values):\n    return sum(values) / len(values)\n"
+  },
+  "docs": {
+    "docs/metrics.md": "Empty sample must return null, not fail.\n"
+  },
+  "log": "ZeroDivisionError: division by zero\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/metrics/avg.py\", line 2, in average\n    return sum(values) / len(values)\nZeroDivisionError: division by zero\n",
+  "expected_files": [
+    "metrics/avg.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "len(values)",
+    "empty",
+    "division",
+    "zero"
+  ],
+  "fix_terms": [
+    "empty",
+    "None",
+    "null",
+    "guard"
+  ],
+  "test_terms": [
+    "empty sample"
+  ],
+  "forbidden_terms": [
+    "Optional import"
+  ]
+}

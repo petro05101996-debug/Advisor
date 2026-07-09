@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_008_js_undefined_id",
+  "title": "JS undefined id",
+  "language": "javascript",
+  "task": "Frontend crashes opening profile.",
+  "files": {
+    "src/profile.js": "export function renderProfile(user) {\n  return `<a href=\"/users/${user.id}\">${user.name}</a>`;\n}\n"
+  },
+  "docs": {
+    "docs/profile.md": "Anonymous users may not have profile object; render guest placeholder.\n"
+  },
+  "log": "TypeError: Cannot read properties of undefined (reading 'id')\n",
+  "stacktrace": "TypeError: Cannot read properties of undefined (reading 'id')\n    at renderProfile (/app/src/profile.js:2:34)\n    at App (/app/src/App.js:20:7)\n",
+  "expected_files": [
+    "src/profile.js"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "user",
+    "undefined",
+    "id",
+    "renderProfile"
+  ],
+  "fix_terms": [
+    "guard",
+    "guest",
+    "placeholder",
+    "optional"
+  ],
+  "test_terms": [
+    "anonymous",
+    "undefined user"
+  ],
+  "forbidden_terms": [
+    "database"
+  ]
+}

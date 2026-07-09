@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/api/request.py", line 3, in parse_id
+    return UUID(raw)
+ValueError: badly formed hexadecimal UUID string

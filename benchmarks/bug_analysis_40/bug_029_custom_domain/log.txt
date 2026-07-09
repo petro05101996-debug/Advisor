@@ -1,0 +1,1 @@
+DomainInvariantViolation: closed order cannot be paid

@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_023_kafka_serialization",
+  "title": "Kafka serialization exception",
+  "language": "java",
+  "task": "Producer cannot send event.",
+  "files": {
+    "src/EventPublisher.java": "producer.send(new ProducerRecord(topic, event));\n"
+  },
+  "docs": {
+    "docs/events.md": "Event must have schema registry subject order-created-v2.\n"
+  },
+  "log": "SerializationException: Error registering Avro schema for subject order-created-v3\n",
+  "stacktrace": "org.apache.kafka.common.errors.SerializationException: Error registering Avro schema for subject order-created-v3\n\tat EventPublisher.publish(EventPublisher.java:1)\n",
+  "expected_files": [
+    "src/EventPublisher.java"
+  ],
+  "expected_lines": [
+    1
+  ],
+  "root_terms": [
+    "SerializationException",
+    "schema",
+    "subject",
+    "order-created-v3"
+  ],
+  "fix_terms": [
+    "schema registry",
+    "subject",
+    "order-created-v2"
+  ],
+  "test_terms": [
+    "schema",
+    "compatibility"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

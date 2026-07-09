@@ -1,0 +1,23 @@
+test_bug_analysis_cli_writes_artifacts (test_core.BugAnalysisTests.test_bug_analysis_cli_writes_artifacts) ... ok
+test_bug_analysis_finds_nullable_root_cause (test_core.BugAnalysisTests.test_bug_analysis_finds_nullable_root_cause) ... ok
+test_compare_cli (test_core.CLITests.test_compare_cli) ... ok
+test_packs (test_core.CLITests.test_packs) ... ok
+test_run_json (test_core.CLITests.test_run_json) ... ok
+test_run_receipt (test_core.CLITests.test_run_receipt) ... ok
+test_version (test_core.CLITests.test_version) ... ok
+test_claim_extractor_splits_bullets (test_core.ClaimTests.test_claim_extractor_splits_bullets) ... ok
+test_contract_uses_pack (test_core.ContractTests.test_contract_uses_pack) ... ok
+test_unknown_pack_fails (test_core.ContractTests.test_unknown_pack_fails) ... ok
+test_bug_analysis_explains_missing_typing_import_case (test_core.RealCaseRegressionTests.test_bug_analysis_explains_missing_typing_import_case) ... ok
+test_python_stacktrace_frame_without_source_line_is_not_lost (test_core.RealCaseRegressionTests.test_python_stacktrace_frame_without_source_line_is_not_lost) ... ok
+test_audit_flags_provider_not_called_without_cmd (test_core.RuntimeTests.test_audit_flags_provider_not_called_without_cmd) ... ok
+test_repair_adds_missing_section (test_core.RuntimeTests.test_repair_adds_missing_section) ... ok
+test_requirements_qa_generates_test_cases (test_core.RuntimeTests.test_requirements_qa_generates_test_cases) ... ok
+test_run_deep_completes (test_core.RuntimeTests.test_run_deep_completes) ... ok
+test_system_design_output_is_user_artifact_not_checklist (test_core.RuntimeTests.test_system_design_output_is_user_artifact_not_checklist) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 8.581s
+
+OK
+cogproxy-dqe 0.3.2

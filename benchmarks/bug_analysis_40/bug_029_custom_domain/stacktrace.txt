@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/workflow/state.py", line 3, in transition
+    raise DomainInvariantViolation("closed order cannot be paid")
+DomainInvariantViolation: closed order cannot be paid

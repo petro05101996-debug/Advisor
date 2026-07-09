@@ -1,0 +1,2 @@
+java.lang.NumberFormatException: For input string: "10.50"
+	at app.AmountParser.parse(AmountParser.java:1)

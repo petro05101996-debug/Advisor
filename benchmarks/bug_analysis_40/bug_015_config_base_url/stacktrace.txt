@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/payments/client.py", line 2, in url
+    return PAYMENT_BASE_URL + "/charge"
+RuntimeError: upstream returned 404 for sandbox endpoint

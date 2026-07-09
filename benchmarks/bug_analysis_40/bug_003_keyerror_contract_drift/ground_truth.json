@@ -1,0 +1,40 @@
+{
+  "case_id": "bug_003_keyerror_contract_drift",
+  "title": "KeyError missing status",
+  "language": "python",
+  "task": "Import job fails on partner payload.",
+  "files": {
+    "etl/mapper.py": "def map_partner(row):\n    return {\"id\": row[\"id\"], \"status\": row[\"status\"].upper()}\n"
+  },
+  "docs": {
+    "docs/partner.md": "Partner v2 payload renamed status to state. Both status and state are accepted during migration.\n"
+  },
+  "log": "payload={\"id\":\"A-10\",\"state\":\"active\"}\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/etl/mapper.py\", line 2, in map_partner\n    return {\"id\": row[\"id\"], \"status\": row[\"status\"].upper()}\nKeyError: 'status'\n",
+  "expected_files": [
+    "etl/mapper.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "status",
+    "state",
+    "contract",
+    "payload"
+  ],
+  "fix_terms": [
+    "state",
+    "fallback",
+    "schema",
+    "validation"
+  ],
+  "test_terms": [
+    "payload without status",
+    "state",
+    "migration"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/cache/client.py", line 2, in get
+    return r.get(k)
+ConnectionError: Error 111 connecting to localhost:6379. Connection refused.

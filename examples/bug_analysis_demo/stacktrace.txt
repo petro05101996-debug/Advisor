@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "examples/bug_analysis_demo/app/orders.py", line 5, in build_payload
+    return {"user_id": user["id"], "order_id": order_id}
+TypeError: 'NoneType' object is not subscriptable

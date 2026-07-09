@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/payments/gateway.py", line 2, in charge
+    return client.post("/charge", json=req, timeout=1)
+ReadTimeout: payment-gateway timeout after 1s

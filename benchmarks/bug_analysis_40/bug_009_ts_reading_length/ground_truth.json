@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_009_ts_reading_length",
+  "title": "TS undefined items length",
+  "language": "typescript",
+  "task": "Cart page crashes for first visit.",
+  "files": {
+    "src/cart.ts": "export function totalCount(cart?: { items?: string[] }) {\n  return cart.items.length;\n}\n"
+  },
+  "docs": {
+    "docs/cart.md": "First visit has empty cart object; absence of cart must be treated as 0.\n"
+  },
+  "log": "Cannot read properties of undefined (reading 'items')\n",
+  "stacktrace": "TypeError: Cannot read properties of undefined (reading 'items')\n    at totalCount (/web/src/cart.ts:2:15)\n",
+  "expected_files": [
+    "src/cart.ts"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "cart",
+    "undefined",
+    "items",
+    "length"
+  ],
+  "fix_terms": [
+    "optional chaining",
+    "0",
+    "guard",
+    "default"
+  ],
+  "test_terms": [
+    "empty cart",
+    "first visit"
+  ],
+  "forbidden_terms": [
+    "SQL"
+  ]
+}

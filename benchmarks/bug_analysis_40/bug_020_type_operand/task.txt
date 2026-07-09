@@ -1,0 +1,1 @@
+Payment amount multiplication fails.

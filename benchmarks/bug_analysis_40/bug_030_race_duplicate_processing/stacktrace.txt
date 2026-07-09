@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/consumer/handler.py", line 3, in handle
+    db.insert(msg.id)
+IntegrityError: duplicate key value violates unique constraint "processed_pkey"

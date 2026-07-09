@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/srv/api/schemas.py", line 2, in validate_customer
+    return CustomerIn(**payload)
+pydantic.ValidationError: 1 validation error for CustomerIn
+email
+  field required

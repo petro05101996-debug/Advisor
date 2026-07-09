@@ -1,0 +1,42 @@
+{
+  "case_id": "bug_002_none_payload_user",
+  "title": "None user in order payload",
+  "language": "python",
+  "task": "Payload generation crashes for order without user.",
+  "files": {
+    "app/orders.py": "from app import users\ndef build_payload(order_id):\n    user = users.find_by_order(order_id)\n    return {\"user_id\": user[\"id\"], \"order_id\": order_id}\n",
+    "app/users.py": "def find_by_order(order_id):\n    return None\n"
+  },
+  "docs": {
+    "docs/orders.md": "If user is missing, API must return USER_NOT_FOUND domain error, not 500.\n"
+  },
+  "log": "request_id=abc ERROR failed to build payload for order_id=42\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/app/orders.py\", line 4, in build_payload\n    return {\"user_id\": user[\"id\"], \"order_id\": order_id}\nTypeError: 'NoneType' object is not subscriptable\n",
+  "expected_files": [
+    "app/orders.py",
+    "app/users.py"
+  ],
+  "expected_lines": [
+    4
+  ],
+  "root_terms": [
+    "find_by_order",
+    "None",
+    "user",
+    "guard"
+  ],
+  "fix_terms": [
+    "guard",
+    "None",
+    "USER_NOT_FOUND",
+    "domain"
+  ],
+  "test_terms": [
+    "regression",
+    "missing user",
+    "order without user"
+  ],
+  "forbidden_terms": [
+    "Optional"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_006_integrity_duplicate",
+  "title": "Duplicate idempotency key",
+  "language": "python/sql",
+  "task": "Payment callback sometimes fails with unique constraint.",
+  "files": {
+    "payments/repository.py": "def save_callback(db, event):\n    db.execute(\"insert into callbacks(idempotency_key, payload) values (:key, :payload)\", event)\n"
+  },
+  "docs": {
+    "docs/payments.md": "Callbacks are at-least-once. Handler must be idempotent by idempotency_key.\n"
+  },
+  "log": "ERROR duplicate key value violates unique constraint \"callbacks_idempotency_key_key\" key=(cb-99) already exists\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/payments/repository.py\", line 2, in save_callback\n    db.execute(\"insert into callbacks(idempotency_key, payload) values (:key, :payload)\", event)\nIntegrityError: duplicate key value violates unique constraint \"callbacks_idempotency_key_key\"\n",
+  "expected_files": [
+    "payments/repository.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "duplicate",
+    "idempotency",
+    "callbacks",
+    "at-least-once"
+  ],
+  "fix_terms": [
+    "upsert",
+    "idempotency",
+    "on conflict",
+    "deduplicate"
+  ],
+  "test_terms": [
+    "duplicate callback",
+    "idempotency"
+  ],
+  "forbidden_terms": [
+    "date format"
+  ]
+}

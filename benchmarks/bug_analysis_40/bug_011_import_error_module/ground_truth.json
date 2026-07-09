@@ -1,0 +1,36 @@
+{
+  "case_id": "bug_011_import_error_module",
+  "title": "ImportError missing module",
+  "language": "python",
+  "task": "Worker fails at startup due missing dependency.",
+  "files": {
+    "worker/main.py": "import payment_sdk\n\ndef run():\n    return payment_sdk.ping()\n"
+  },
+  "docs": {},
+  "log": "ModuleNotFoundError: No module named 'payment_sdk'\n\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/worker/main.py\", line 1, in <module>\n    import payment_sdk\nModuleNotFoundError: No module named 'payment_sdk'\n",
+  "expected_files": [
+    "worker/main.py"
+  ],
+  "expected_lines": [
+    1
+  ],
+  "root_terms": [
+    "payment_sdk",
+    "ModuleNotFoundError",
+    "dependency",
+    "import"
+  ],
+  "fix_terms": [
+    "requirements",
+    "dependency",
+    "install"
+  ],
+  "test_terms": [
+    "startup",
+    "import"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

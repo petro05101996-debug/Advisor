@@ -1,0 +1,35 @@
+{
+  "case_id": "bug_028_large_project_limit",
+  "title": "Large project stacktrace file after limit",
+  "language": "python",
+  "task": "Large project error should still locate failing file.",
+  "files": {
+    "zzzz/final/orders.py": "def boom():\n    user = None\n    return user[\"id\"]\n"
+  },
+  "docs": {
+    "docs/large.md": "Final orders module must handle missing user.\n"
+  },
+  "log": "TypeError in zzzz/final/orders.py\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/zzzz/final/orders.py\", line 3, in boom\n    return user[\"id\"]\nTypeError: 'NoneType' object is not subscriptable\n",
+  "expected_files": [
+    "zzzz/final/orders.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "user",
+    "None",
+    "zzzz/final/orders.py"
+  ],
+  "fix_terms": [
+    "guard",
+    "None"
+  ],
+  "test_terms": [
+    "missing user"
+  ],
+  "forbidden_terms": [
+    "timeout"
+  ]
+}

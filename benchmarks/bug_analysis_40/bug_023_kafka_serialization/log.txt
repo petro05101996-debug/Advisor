@@ -1,0 +1,1 @@
+SerializationException: Error registering Avro schema for subject order-created-v3

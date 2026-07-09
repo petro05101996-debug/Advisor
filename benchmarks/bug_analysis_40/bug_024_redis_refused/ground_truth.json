@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_024_redis_refused",
+  "title": "Redis connection refused",
+  "language": "python",
+  "task": "Cache call fails in prod.",
+  "files": {
+    "cache/client.py": "def get(r,k):\n    return r.get(k)\n"
+  },
+  "docs": {
+    "docs/cache.md": "Prod Redis host is redis-master:6379.\n"
+  },
+  "log": "ConnectionError: Error 111 connecting to localhost:6379. Connection refused.\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/cache/client.py\", line 2, in get\n    return r.get(k)\nConnectionError: Error 111 connecting to localhost:6379. Connection refused.\n",
+  "expected_files": [
+    "cache/client.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "localhost",
+    "redis-master",
+    "connection refused",
+    "config"
+  ],
+  "fix_terms": [
+    "Redis host",
+    "config",
+    "redis-master"
+  ],
+  "test_terms": [
+    "prod config",
+    "redis"
+  ],
+  "forbidden_terms": [
+    "KeyError"
+  ]
+}

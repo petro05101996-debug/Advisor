@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/settings/loader.py", line 3, in load
+    return yaml.safe_load(open(path))
+yaml.scanner.ScannerError: mapping values are not allowed here

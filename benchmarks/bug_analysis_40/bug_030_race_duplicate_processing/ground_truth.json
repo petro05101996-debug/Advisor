@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_030_race_duplicate_processing",
+  "title": "Race duplicate processing",
+  "language": "python",
+  "task": "Concurrent consumers process same message twice.",
+  "files": {
+    "consumer/handler.py": "def handle(msg, db):\n    if not db.exists(msg.id):\n        db.insert(msg.id)\n        process(msg)\n"
+  },
+  "docs": {
+    "docs/consumer.md": "Multiple consumers run concurrently; idempotency must be atomic insert-or-ignore.\n"
+  },
+  "log": "IntegrityError: duplicate key value violates unique constraint \"processed_pkey\" message_id=m1\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/consumer/handler.py\", line 3, in handle\n    db.insert(msg.id)\nIntegrityError: duplicate key value violates unique constraint \"processed_pkey\"\n",
+  "expected_files": [
+    "consumer/handler.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "exists",
+    "insert",
+    "race",
+    "atomic"
+  ],
+  "fix_terms": [
+    "insert-or-ignore",
+    "atomic",
+    "idempotency"
+  ],
+  "test_terms": [
+    "concurrent",
+    "duplicate"
+  ],
+  "forbidden_terms": [
+    "date"
+  ]
+}

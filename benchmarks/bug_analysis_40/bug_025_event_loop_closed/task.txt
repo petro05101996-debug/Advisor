@@ -1,0 +1,1 @@
+Async worker fails on shutdown.

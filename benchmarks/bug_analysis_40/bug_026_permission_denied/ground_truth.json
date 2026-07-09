@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_026_permission_denied",
+  "title": "Permission denied file",
+  "language": "python",
+  "task": "Report export fails in container.",
+  "files": {
+    "reports/export.py": "def write_report(path, text):\n    open(path, \"w\").write(text)\n"
+  },
+  "docs": {
+    "docs/deploy.md": "Container runs as non-root and may write only to /tmp/reports.\n"
+  },
+  "log": "PermissionError: [Errno 13] Permission denied: '/var/reports/out.csv'\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/reports/export.py\", line 2, in write_report\n    open(path, \"w\").write(text)\nPermissionError: [Errno 13] Permission denied: '/var/reports/out.csv'\n",
+  "expected_files": [
+    "reports/export.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "PermissionError",
+    "/var/reports",
+    "non-root",
+    "/tmp/reports"
+  ],
+  "fix_terms": [
+    "writable path",
+    "/tmp/reports",
+    "permissions"
+  ],
+  "test_terms": [
+    "container",
+    "permissions"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

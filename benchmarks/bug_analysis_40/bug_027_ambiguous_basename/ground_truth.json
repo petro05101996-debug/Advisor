@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_027_ambiguous_basename",
+  "title": "Ambiguous basename wrong orders.py",
+  "language": "python",
+  "task": "Stacktrace has relative orders.py basename.",
+  "files": {
+    "service_a/orders.py": "def build(x):\n    return {\"ok\": True}\n",
+    "service_b/orders.py": "def build(order):\n    user = None\n    return user[\"id\"]\n"
+  },
+  "docs": {
+    "docs/orders.md": "service_b handles enrichment.\n"
+  },
+  "log": "TypeError in service_b order enrichment\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"orders.py\", line 3, in build\n    return user[\"id\"]\nTypeError: 'NoneType' object is not subscriptable\n",
+  "expected_files": [
+    "service_b/orders.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "service_b",
+    "user",
+    "None",
+    "orders.py"
+  ],
+  "fix_terms": [
+    "guard",
+    "None"
+  ],
+  "test_terms": [
+    "service_b"
+  ],
+  "forbidden_terms": [
+    "service_a only"
+  ]
+}

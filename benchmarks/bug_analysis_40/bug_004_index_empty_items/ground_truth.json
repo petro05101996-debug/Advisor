@@ -1,0 +1,39 @@
+{
+  "case_id": "bug_004_index_empty_items",
+  "title": "IndexError empty list",
+  "language": "python",
+  "task": "Invoice generation crashes for customer without items.",
+  "files": {
+    "billing/invoice.py": "def primary_item(items):\n    return items[0]\ndef make_invoice(order):\n    item = primary_item(order.items)\n    return {\"sku\": item.sku}\n"
+  },
+  "docs": {
+    "docs/billing.md": "Orders with no billable items must create zero-amount invoice.\n"
+  },
+  "log": "order_id=77 items=[]\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/billing/invoice.py\", line 2, in primary_item\n    return items[0]\nIndexError: list index out of range\n",
+  "expected_files": [
+    "billing/invoice.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "items",
+    "empty",
+    "list",
+    "primary_item"
+  ],
+  "fix_terms": [
+    "empty",
+    "guard",
+    "zero-amount"
+  ],
+  "test_terms": [
+    "empty items",
+    "zero-amount",
+    "regression"
+  ],
+  "forbidden_terms": [
+    "database"
+  ]
+}

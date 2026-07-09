@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_019_uuid_value",
+  "title": "Invalid UUID",
+  "language": "python",
+  "task": "Request parser fails on id.",
+  "files": {
+    "api/request.py": "from uuid import UUID\ndef parse_id(raw):\n    return UUID(raw)\n"
+  },
+  "docs": {
+    "docs/api.md": "Client may send temporary numeric ids; reject with 400 INVALID_ID.\n"
+  },
+  "log": "ValueError: badly formed hexadecimal UUID string\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/api/request.py\", line 3, in parse_id\n    return UUID(raw)\nValueError: badly formed hexadecimal UUID string\n",
+  "expected_files": [
+    "api/request.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "UUID",
+    "badly formed",
+    "numeric",
+    "INVALID_ID"
+  ],
+  "fix_terms": [
+    "400",
+    "validation",
+    "INVALID_ID"
+  ],
+  "test_terms": [
+    "invalid uuid"
+  ],
+  "forbidden_terms": [
+    "database"
+  ]
+}

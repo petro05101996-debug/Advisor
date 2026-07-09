@@ -1,0 +1,3 @@
+TypeError: Cannot read properties of undefined (reading 'id')
+    at renderProfile (/app/src/profile.js:2:34)
+    at App (/app/src/App.js:20:7)

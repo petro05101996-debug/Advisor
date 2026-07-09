@@ -1,0 +1,2 @@
+org.apache.kafka.common.errors.SerializationException: Error registering Avro schema for subject order-created-v3
+	at EventPublisher.publish(EventPublisher.java:1)

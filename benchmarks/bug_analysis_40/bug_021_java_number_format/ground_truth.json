@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_021_java_number_format",
+  "title": "Java NumberFormatException",
+  "language": "java",
+  "task": "Java service fails parsing amount.",
+  "files": {
+    "src/main/java/app/AmountParser.java": "class AmountParser { int parse(String v){ return Integer.parseInt(v); } }\n"
+  },
+  "docs": {
+    "docs/amount.md": "Amount can contain decimal separator, use BigDecimal.\n"
+  },
+  "log": "java.lang.NumberFormatException: For input string: \"10.50\"\n",
+  "stacktrace": "java.lang.NumberFormatException: For input string: \"10.50\"\n\tat app.AmountParser.parse(AmountParser.java:1)\n",
+  "expected_files": [
+    "src/main/java/app/AmountParser.java"
+  ],
+  "expected_lines": [
+    1
+  ],
+  "root_terms": [
+    "10.50",
+    "Integer.parseInt",
+    "BigDecimal",
+    "decimal"
+  ],
+  "fix_terms": [
+    "BigDecimal",
+    "decimal",
+    "validation"
+  ],
+  "test_terms": [
+    "10.50",
+    "decimal"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

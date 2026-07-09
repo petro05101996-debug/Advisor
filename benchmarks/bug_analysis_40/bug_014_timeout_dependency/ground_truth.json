@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_014_timeout_dependency",
+  "title": "Timeout payment gateway",
+  "language": "python",
+  "task": "Checkout times out calling payment gateway.",
+  "files": {
+    "payments/gateway.py": "def charge(client, req):\n    return client.post(\"/charge\", json=req, timeout=1)\n"
+  },
+  "docs": {
+    "docs/gateway.md": "Gateway p95 latency is 2.5s; client timeout must be >= 3s with safe retry by idempotency key.\n"
+  },
+  "log": "ReadTimeout: payment-gateway timeout after 1s\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/payments/gateway.py\", line 2, in charge\n    return client.post(\"/charge\", json=req, timeout=1)\nReadTimeout: payment-gateway timeout after 1s\n",
+  "expected_files": [
+    "payments/gateway.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "timeout",
+    "payment-gateway",
+    "1s",
+    "3s"
+  ],
+  "fix_terms": [
+    "timeout",
+    "retry",
+    "idempotency"
+  ],
+  "test_terms": [
+    "gateway latency",
+    "timeout"
+  ],
+  "forbidden_terms": [
+    "KeyError"
+  ]
+}

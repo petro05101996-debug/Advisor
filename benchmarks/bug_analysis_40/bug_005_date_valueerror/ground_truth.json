@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_005_date_valueerror",
+  "title": "ValueError bad date format",
+  "language": "python",
+  "task": "Date parser rejects partner date.",
+  "files": {
+    "app/date_parser.py": "from datetime import datetime\ndef parse_partner_date(value):\n    return datetime.strptime(value, \"%Y-%m-%d\")\n"
+  },
+  "docs": {
+    "docs/partner.md": "Partner sends date in dd.MM.yyyy for legacy API.\n"
+  },
+  "log": "partner_date=09.07.2026\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/app/date_parser.py\", line 3, in parse_partner_date\n    return datetime.strptime(value, \"%Y-%m-%d\")\nValueError: time data '09.07.2026' does not match format '%Y-%m-%d'\n",
+  "expected_files": [
+    "app/date_parser.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "dd.MM.yyyy",
+    "%Y-%m-%d",
+    "format",
+    "date"
+  ],
+  "fix_terms": [
+    "format",
+    "dd.MM.yyyy",
+    "validation"
+  ],
+  "test_terms": [
+    "legacy date",
+    "09.07.2026"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

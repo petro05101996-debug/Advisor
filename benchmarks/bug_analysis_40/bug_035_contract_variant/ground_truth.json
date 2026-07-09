@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_035_contract_variant",
+  "title": "Missing payload field_35",
+  "language": "python",
+  "task": "Consumer fails because payload misses field_35.",
+  "files": {
+    "consumer_35/mapper.py": "def map_payload(p):\n    return p[\"field_35\"].strip()\n"
+  },
+  "docs": {
+    "docs/contract_35.md": "field_35 is optional in v2; fallback must be used.\n"
+  },
+  "log": "payload={\"id\":\"x\"} missing field_35\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/consumer_35/mapper.py\", line 2, in map_payload\n    return p[\"field_35\"].strip()\nKeyError: 'field_35'\n",
+  "expected_files": [
+    "consumer_35/mapper.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "field_35",
+    "optional",
+    "KeyError",
+    "payload"
+  ],
+  "fix_terms": [
+    "fallback",
+    "optional",
+    "schema"
+  ],
+  "test_terms": [
+    "without field_35"
+  ],
+  "forbidden_terms": [
+    "timeout"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_012_attribute_none",
+  "title": "AttributeError None amount",
+  "language": "python",
+  "task": "Pricing fails when discount absent.",
+  "files": {
+    "pricing/calc.py": "def price(order):\n    return order.discount.amount\n"
+  },
+  "docs": {
+    "docs/pricing.md": "Discount is optional and absent for base tariff.\n"
+  },
+  "log": "AttributeError: 'NoneType' object has no attribute 'amount'\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/pricing/calc.py\", line 2, in price\n    return order.discount.amount\nAttributeError: 'NoneType' object has no attribute 'amount'\n",
+  "expected_files": [
+    "pricing/calc.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "discount",
+    "None",
+    "amount",
+    "optional"
+  ],
+  "fix_terms": [
+    "guard",
+    "default",
+    "optional"
+  ],
+  "test_terms": [
+    "without discount"
+  ],
+  "forbidden_terms": [
+    "ModuleNotFoundError"
+  ]
+}

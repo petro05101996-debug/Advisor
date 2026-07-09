@@ -1,0 +1,3 @@
+java.lang.NullPointerException: Cannot invoke "Customer.getName()" because return value of "Order.getCustomer()" is null
+    at app.OrderService.customerName(OrderService.java:4)
+    at app.Controller.confirm(Controller.java:12)

@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_029_custom_domain",
+  "title": "Custom domain invariant violation",
+  "language": "python",
+  "task": "State machine rejects transition but logs custom error.",
+  "files": {
+    "workflow/state.py": "def transition(state, event):\n    if state == \"CLOSED\" and event == \"PAY\":\n        raise DomainInvariantViolation(\"closed order cannot be paid\")\n"
+  },
+  "docs": {
+    "docs/state.md": "CLOSED is terminal; PAY after CLOSED must be ignored and audited.\n"
+  },
+  "log": "DomainInvariantViolation: closed order cannot be paid\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/workflow/state.py\", line 3, in transition\n    raise DomainInvariantViolation(\"closed order cannot be paid\")\nDomainInvariantViolation: closed order cannot be paid\n",
+  "expected_files": [
+    "workflow/state.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "CLOSED",
+    "PAY",
+    "terminal",
+    "DomainInvariantViolation"
+  ],
+  "fix_terms": [
+    "ignore",
+    "audit",
+    "state transition"
+  ],
+  "test_terms": [
+    "PAY after CLOSED",
+    "terminal"
+  ],
+  "forbidden_terms": [
+    "NoneType"
+  ]
+}

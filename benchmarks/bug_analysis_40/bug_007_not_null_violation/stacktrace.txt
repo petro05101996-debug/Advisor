@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/orders/repository.py", line 2, in insert_order
+    db.execute("insert into orders(id, amount) values (:id, :amount)", order)
+IntegrityError: null value in column "customer_id" violates not-null constraint

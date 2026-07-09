@@ -1,0 +1,37 @@
+{
+  "case_id": "bug_016_yaml_parse",
+  "title": "YAML parse error",
+  "language": "python",
+  "task": "App fails loading config.",
+  "files": {
+    "settings/loader.py": "import yaml\ndef load(path):\n    return yaml.safe_load(open(path))\n"
+  },
+  "docs": {
+    "docs/config.md": "YAML must contain smtp.host and smtp.port.\n"
+  },
+  "log": "yaml.scanner.ScannerError: mapping values are not allowed here\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/settings/loader.py\", line 3, in load\n    return yaml.safe_load(open(path))\nyaml.scanner.ScannerError: mapping values are not allowed here\n",
+  "expected_files": [
+    "settings/loader.py"
+  ],
+  "expected_lines": [
+    3
+  ],
+  "root_terms": [
+    "YAML",
+    "ScannerError",
+    "config",
+    "mapping"
+  ],
+  "fix_terms": [
+    "fix yaml",
+    "validate",
+    "config"
+  ],
+  "test_terms": [
+    "invalid yaml"
+  ],
+  "forbidden_terms": [
+    "database"
+  ]
+}

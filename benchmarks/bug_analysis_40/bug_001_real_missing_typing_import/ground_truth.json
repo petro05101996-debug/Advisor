@@ -1,0 +1,42 @@
+{
+  "case_id": "bug_001_real_missing_typing_import",
+  "title": "NameError Optional not defined in CLI",
+  "language": "python",
+  "task": "CLI import fails. Find root cause.",
+  "files": {
+    "cogproxy_dqe_core/cli.py": "import argparse\nimport json\nimport sys\nfrom .runtime import run_engine\nfrom .receipt import format_receipt\n\ndef main(argv: Optional[List[str]] = None) -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument('task')\n    args = parser.parse_args(argv)\n    result = run_engine(args.task)\n    print(format_receipt(result))\n"
+  },
+  "docs": {
+    "README.md": "CLI should be importable and runnable with python -m cogproxy_dqe_core.\n"
+  },
+  "log": "ERROR startup failed while importing cogproxy_dqe_core.cli\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\n  File \"/tmp/project/cogproxy_dqe_core/cli.py\", line 7, in <module>\n    def main(argv: Optional[List[str]] = None) -> None:\nNameError: name 'Optional' is not defined\n",
+  "expected_files": [
+    "cogproxy_dqe_core/cli.py"
+  ],
+  "expected_lines": [
+    7
+  ],
+  "root_terms": [
+    "Optional",
+    "List",
+    "typing",
+    "import"
+  ],
+  "fix_terms": [
+    "from typing import Optional, List",
+    "typing",
+    "Optional",
+    "List"
+  ],
+  "test_terms": [
+    "import",
+    "compileall",
+    "smoke"
+  ],
+  "forbidden_terms": [
+    "database",
+    "network",
+    "timeout"
+  ]
+}

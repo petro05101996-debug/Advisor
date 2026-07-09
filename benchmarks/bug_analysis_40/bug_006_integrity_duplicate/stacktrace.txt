@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/payments/repository.py", line 2, in save_callback
+    db.execute("insert into callbacks(idempotency_key, payload) values (:key, :payload)", event)
+IntegrityError: duplicate key value violates unique constraint "callbacks_idempotency_key_key"

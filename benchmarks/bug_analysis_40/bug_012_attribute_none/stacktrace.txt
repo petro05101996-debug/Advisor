@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/srv/pricing/calc.py", line 2, in price
+    return order.discount.amount
+AttributeError: 'NoneType' object has no attribute 'amount'

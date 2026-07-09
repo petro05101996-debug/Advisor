@@ -1,0 +1,38 @@
+{
+  "case_id": "bug_013_json_decode_html",
+  "title": "JSONDecodeError HTML response",
+  "language": "python",
+  "task": "Client parses external service response.",
+  "files": {
+    "client/api.py": "def parse(resp):\n    return resp.json()[\"status\"]\n"
+  },
+  "docs": {
+    "docs/external.md": "External service returns HTML error page on 502.\n"
+  },
+  "log": "response_status=502 content_type=text/html\n",
+  "stacktrace": "Traceback (most recent call last):\n  File \"/srv/client/api.py\", line 2, in parse\n    return resp.json()[\"status\"]\nJSONDecodeError: Expecting value: line 1 column 1 (char 0)\n",
+  "expected_files": [
+    "client/api.py"
+  ],
+  "expected_lines": [
+    2
+  ],
+  "root_terms": [
+    "JSONDecodeError",
+    "502",
+    "HTML",
+    "resp.json"
+  ],
+  "fix_terms": [
+    "status",
+    "Content-Type",
+    "handle 502"
+  ],
+  "test_terms": [
+    "html response",
+    "502"
+  ],
+  "forbidden_terms": [
+    "duplicate"
+  ]
+}
