@@ -1,0 +1,111 @@
+name: Unzip archive into repository
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
+      - name: Find ZIP archive in repository root
+        id: find_zip
+        run: |
+          echo "Files in repository root:"
+          ls -la
+
+          ZIP_COUNT=$(find . -maxdepth 1 -type f -iname "*.zip" | wc -l | tr -d ' ')
+
+          if [ "$ZIP_COUNT" = "0" ]; then
+            echo "No ZIP archive found in repository root."
+            echo "Upload ZIP archive to repository root first."
+            exit 1
+          fi
+
+          if [ "$ZIP_COUNT" != "1" ]; then
+            echo "More than one ZIP archive found in repository root."
+            echo "Leave only one ZIP archive in repository root."
+            find . -maxdepth 1 -type f -iname "*.zip" -print
+            exit 1
+          fi
+
+          ZIP_FILE=$(find . -maxdepth 1 -type f -iname "*.zip" | head -n 1)
+          ZIP_FILE="${ZIP_FILE#./}"
+
+          echo "Found archive: $ZIP_FILE"
+          echo "zip_file=$ZIP_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Unzip archive to temporary directory
+        run: |
+          ZIP_FILE="${{ steps.find_zip.outputs.zip_file }}"
+
+          rm -rf _unzipped
+          mkdir -p _unzipped
+
+          unzip -o "$ZIP_FILE" -d _unzipped
+
+          echo "Unzipped content:"
+          find _unzipped -maxdepth 3 -type f | sort | head -200
+
+      - name: Move files to repository root
+        run: |
+          shopt -s dotglob nullglob
+
+          TOP_LEVEL_COUNT=$(find _unzipped -mindepth 1 -maxdepth 1 | wc -l | tr -d ' ')
+
+          if [ "$TOP_LEVEL_COUNT" = "1" ]; then
+            ROOT_ITEM="$(find _unzipped -mindepth 1 -maxdepth 1 | head -n 1)"
+
+            if [ -d "$ROOT_ITEM" ]; then
+              echo "Archive has one root folder: $ROOT_ITEM"
+              cp -a "$ROOT_ITEM"/. .
+            else
+              echo "Archive has one root file. Copying directly."
+              cp -a _unzipped/. .
+            fi
+          else
+            echo "Archive content is directly inside ZIP"
+            cp -a _unzipped/. .
+          fi
+
+      - name: Cleanup ZIP and temporary files
+        run: |
+          ZIP_FILE="${{ steps.find_zip.outputs.zip_file }}"
+
+          rm -rf _unzipped
+          rm -f "$ZIP_FILE"
+          rm -f .gitkeep
+
+      - name: Show final repository files
+        run: |
+          echo "Final repository files:"
+          find . -maxdepth 3 \
+            -not -path "./.git/*" \
+            -not -path "./.github/workflows/*" \
+            | sort | head -300
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+
+          git commit -m "Unzip archive into repository"
+          git push
